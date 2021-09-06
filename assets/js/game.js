@@ -1,3 +1,10 @@
+// function to generate a random numeric value
+var randomNumber = function(min, max) {
+  var value = Math.floor(Math.random() * (max - min +1) + min);
+
+  return value;
+};
+
 // fight function
 var fight = function(enemy) {
     //repeat and execute as long as the enemy-robot is alive
@@ -22,7 +29,7 @@ var fight = function(enemy) {
       }
        
         // generate randome damage value based on player's attack power
-        var damage = randomeNumber(playerInfo.attack - 3, playerInfo.attack);
+        var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
           
         enemy.health = Math.max(0, enemy.health - damage);
 
@@ -42,8 +49,10 @@ var fight = function(enemy) {
         } else {
           window.alert( enemy.name + " still has " + enemy.health + " health left.");
         }
-         var damage = randomeNumber(enemy.attack - 3, enemy.attack);
+         var damage = randomNumber(enemy.attack - 3, enemy.attack);
+
          playerInfo.health = Math.max(0, playerInfo.health - damage);
+
         console.log (
           enemy.name + "attacked " + playerInfo.name + " . " + playerInfo.name + " now has " + playerInfo.health + " health remaining."
         );
@@ -144,17 +153,21 @@ var shop = function() {
             break;
    }
 };
-// function to generate a random numeric value
-var randomNumber = function(min, max) {
-  var value = Math.floor(Math.random() * (max - min +1) + min);
-  return value;
-};
+ //function to set name
+ var getPlayerName = function() {
+   var name = "";
 
+   while (name === "" || name === null) {
+     name = prompt("What is your robot's name?");
+   }
+   console.log("Your robot's name is " + name);
+   return name;
+  }
 var playerInfo = {
-name = window.prompt("What is your robot's name?"),
-health = 100,
-attack = 10,
-money = 10,
+name: getPlayerName(),
+health: 100,
+attack: 10,
+money: 10,
 reset: function() {
   this.health = 100;
   this.money = 10;
@@ -195,5 +208,10 @@ var enemyInfo = [
     name:"Robo Trumble",
     attack: randomNumber(10, 14)
   }
-]
+];
+console.log(enemyInfo);
+console.log(enemyInfo[0]);
+console.log(enemyInfo[0].name);
+console.log(enemyInfo[0]["attack"]);
+
 startGame();
